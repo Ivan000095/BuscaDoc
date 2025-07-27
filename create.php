@@ -33,8 +33,8 @@
         <br>
         <div class="row justify-content-center">
             <div class="col-4">
-                <input type="reset" value="Limpiar" class="btn btn-outline-success">
-                <input type="submit" value="Iniciar sesión" class="btn btn-outline-success">
+                <input type="reset" value="Limpiar" class="btn btn-outline-success me-2">
+                <input type="submit" value="Iniciar sesión" class="btn btn-outline-success me-2">
                 <a href="Registro.php"class="btn btn-outline-success">Registrarse</a>
             </div>
         </div>

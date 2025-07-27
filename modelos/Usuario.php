@@ -2,16 +2,19 @@
 class Usuario {
     public $correo;
     public $pswd;
+    public $Rol;
     public $foto;
 
     public static function valida($correo, $pswd) {
         include('conexion.php');
-        $sql = "SELECT * FROM TUsuarios WHERE Correo = '$correo' AND password = '$password'";
+        $sql = "SELECT * FROM Usuarios WHERE Correo = '$correo' AND pswd = '$pswd'";
         $resultado = $con->query($sql);
         if ($resultado && $fila = $resultado->fetch_assoc()) {
             $usuario = new Usuario();
             $usuario->correo = $fila['Correo'];
             $usuario->password = $fila['password'];
+            $usuario->Rol = $fila['Rol'];
+
             return $usuario;
         } else {
             return null;

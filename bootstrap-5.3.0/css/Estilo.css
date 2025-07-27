@@ -1,31 +1,45 @@
 body {
-    background-color: #ebf1ec;
+    background-color: #ebf1ec !important;
 }
 
 nav {
-    background-color: #00c3a5;
+    background-color: #00c3a5 !important;
     width: 100%;
 }
 
 footer {
-    background-color: #00c3a5;
+    background-color: #00c3a5 !important;
     height: 20vh;
-    padding: 45px;
+    padding: 50px;
 }
 
-#logoletras {
-  font-family: 'Poppins', sans-serif;
+#presentacion{
+  font-family: 'Cooper Black', sans-serif;
   font-weight: 600;
-  font-size: 48px;
-  color: #ffffff; /* Ajusta según sea necesario */
+  font-size: 40px;
+  color: #eaf5f5;
   letter-spacing: 1px;
 }
 
+#logoletras {
+  font-family: 'Cooper Black', sans-serif;
+  font-weight: 600;
+  font-size: 40px;
+  color: #ffffff;
+  letter-spacing: 1px;
+  text-shadow: 5px 5px 20px #111d1b;
+  transition: 0.3s;
+}
+
+#logoletras:hover {
+    color: #f0ebeb;
+    transform: scale(1.1);
+}
 
 #btnlog {
     position: absolute;
-    width: 15%;
-    right: 1%;
+    width: 14%;
+    right: 4%;
 }
 
 #contenido {
@@ -169,3 +183,23 @@ footer {
     object-fit: cover;
 }
 
+.btn {
+    transition: 0.3s;
+}
+
+.btn:hover {
+    transform: scale(1.1)!important;
+}
+
+#btnres {
+    position: relative;
+    right: 0.4%;
+}
+
+.brav {
+    transition: 0.3s;
+}
+
+.brav:hover {
+    transform: scale(1.1)!important;
+}
