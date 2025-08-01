@@ -1,37 +1,41 @@
 <?php
-include('../../modelos/Doctor.php');
-$especialidad=Doctor::finds();
+    include('../../modelos/Doctor.php');
+    $especialidad=Doctor::finds();
 ?>
 <html>
   <?php include('../../head.php'); ?>
   <body>
     <?php include('../../menu.php') ?>
     <div id="contenido">
+        <br>
         <h1 id="Titulo">Nuevo Doctor</h1>
         <br>
         <form action="guardar.php" method="POST" enctype="multipart/form-data">
             <div class="container">
                 <div class="row">
                     <div class="col-md-6">
-                        <div class="mb-3">
-                            <label for="nombre" class="form-label">Nombre</label>
-                            <input type="text" class="form-control" name="nombre" id="nombre" required>
-                        </div>
-                        <br>
-                        <div class="mb-3">
-                            <label for="cedula" class="form-label">Cédula profesional</label>
-                            <input type="text" class="form-control" name="cedula" id="cedula" required>
-                        </div>
-                        <br>
-                        <div class="mb-3">
-                            <label for="correo" class="form-label">Correo</label>
-                            <input type="email" class="form-control" name="correo" id="correo" required>
-                        </div>
-                        <br>
-                        <div class="mb-3">
-                            <label for="password" class="form-label">Contraseña</label>
-                            <input type="password" class="form-control" name="password" id="password" required>
-                        </div>
+                        <fieldset>
+                            <legend>Información personal</legend>
+                            <div class="mb-3">
+                                <label for="nombre" class="form-label">Nombre</label>
+                                <input type="text" class="form-control" name="nombre" id="nombre" required>
+                            </div>
+                            <br>
+                            <div class="mb-3">
+                                <label for="cedula" class="form-label">Cédula profesional</label>
+                                <input type="text" class="form-control" name="cedula" id="cedula" required>
+                            </div>
+                            <br>
+                            <div class="mb-3">
+                                <label for="correo" class="form-label">Correo</label>
+                                <input type="email" class="form-control" name="correo" id="correo" required>
+                            </div>
+                            <br>
+                            <div class="mb-3">
+                                <label for="password" class="form-label">Contraseña</label>
+                                <input type="password" class="form-control" name="password" id="password" required>
+                            </div>
+                        </fieldset>
                         <br>
                         <div class="mb-3">
                             <label for="foto" class="form-label">Inserte una foto del Doctor</label>

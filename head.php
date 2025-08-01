@@ -3,9 +3,9 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
-        <title>ServiFinder</title>
+        <title>BuscaDoc</title>
         <!-- Favicon-->
-        <link rel="icon" type="image/x-icon" href="/ServiFinder/img/Icon.ico" />
+        <link rel="icon" type="image/x-icon" href="/BuscaDoc/img/Icon.png" />
 
         <!-- Iconos -->    
         <link href="/BuscaDoc/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet" />

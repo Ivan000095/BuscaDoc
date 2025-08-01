@@ -12,7 +12,7 @@ class Usuario {
         if ($resultado && $fila = $resultado->fetch_assoc()) {
             $usuario = new Usuario();
             $usuario->correo = $fila['Correo'];
-            $usuario->password = $fila['password'];
+            $usuario->pswd = $fila['pswd'];
             $usuario->Rol = $fila['Rol'];
 
             return $usuario;

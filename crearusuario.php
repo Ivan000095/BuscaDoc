@@ -24,7 +24,7 @@
     }
 
     // Datos del formulario
-    $usr->correo = $_POST['correo'];
+    $usr->correo = $_POST['Correo'];
     $usr->pswd = $_POST['password'];
     $usr->Register();
     echo '<meta http-equiv="refresh" content="0;url=create.php">';

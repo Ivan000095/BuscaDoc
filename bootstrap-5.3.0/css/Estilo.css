@@ -1,14 +1,14 @@
 body {
-    background-color: #ebf1ec !important;
+    background-color: #ececec!important;
 }
 
 nav {
-    background-color: #00c3a5 !important;
+    background-color: #4b7d84 !important;
     width: 100%;
 }
 
 footer {
-    background-color: #00c3a5 !important;
+    background-color: #4b7d84 !important;
     height: 20vh;
     padding: 50px;
 }
@@ -25,7 +25,7 @@ footer {
   font-family: 'Cooper Black', sans-serif;
   font-weight: 600;
   font-size: 40px;
-  color: #ffffff;
+  color: #dedee0;
   letter-spacing: 1px;
   text-shadow: 5px 5px 20px #111d1b;
   transition: 0.3s;
@@ -115,6 +115,11 @@ footer {
 
 #UTSelva{
     width: 160px;
+    transition: 0.3s;
+}
+
+#UTSelva:hover {
+    transform: scale(1.1);
 }
 
 .navbar-nav .registro .nav-link:hover {
@@ -143,7 +148,7 @@ footer {
     border: 0.5px solid black;
     padding: 3px 3px;
     transition: background-color 0.3s, color 0.3s; 
-    color: #00c3a5; 
+    color: #4b7d84; 
 
 }
 
@@ -151,7 +156,7 @@ footer {
   position: absolute;
   top: 100%;
   left: 0;
-  background-color: #00c3a5;
+  background-color: #4b7d84;
   list-style: none;
   padding: 0;
   margin: 0;
@@ -197,9 +202,41 @@ footer {
 }
 
 .brav {
-    transition: 0.3s;
+    display: inline-block;
+    transition: transform 0.3s ease-in-out;
+    transform-origin: center;
+    will-change: transform;
+}
+.brav:hover {
+    transform: scale(1.1);
 }
 
-.brav:hover {
-    transform: scale(1.1)!important;
+.btn-outline-success{
+    border-color:#4b7d84!important;
+    color: #4b7d84 !important;
 }
+
+.btn-outline-success:hover{
+    background-color:#4b7d84!important;
+    color:white!important;
+}
+
+.btn-outline-default{
+    border-color:#ececec!important;
+    color: #ececec !important;
+}
+
+.btn-outline-default:hover{
+    background-color:#ececec!important;
+    border-color:#ececec!important;
+    color:#111d1b!important;
+}
+
+.nav-link{
+    color: #ececec!important;
+}
+
+.nav-link:hover{
+    color: #111d1b!important;
+}
+

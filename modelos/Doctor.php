@@ -1,7 +1,6 @@
 <?php
 
 class Doctor {
-
     public $idDoctor;
     public $idusr;
     public $idespecialidad;
@@ -142,19 +141,20 @@ class Doctor {
         include('conexion.php');
         if( $this->idDoctor==0 ) {
            try{
+            $rol='Doctor';
             $con->begin_transaction();
-            $sql1 = $con->prepare("INSERT INTO Usuarios(correo, Foto, pswd,) VALUES (?,?,?)");
-            $sql1->bind_param("sss", $this->correo, $this->foto, $this->password,);
+            $sql1 = $con->prepare("INSERT INTO Usuarios(correo, Foto, pswd, Rol) VALUES (?,?,?,?)");
+            $sql1->bind_param("ssss", $this->correo, $this->foto, $this->password, $rol);
             $sql1->execute();
             $this->idusr=$con->insert_id;
 
-            $sql2 = $con->prepare("INSERT INTO Doctores(Nombre,Cedula,Telefono,F_Nacimiento,Idioma,Descripcion,Genero,Id_Usuario) VALUES (?,?,?,?,?,?,?,?)");
-            $sql2->bind_param("sssssssi",$this->nombre,$this->cedula, $this->telefono,$this->fecha,$this->idiomas,$this->descripcion,$this->genero,$this->idusr);
+            $sql2 = $con->prepare("INSERT INTO Doctores(Nombre,F_Nacimiento,Idioma,Descripcion,Genero,Id_Usuario) VALUES (?,?,?,?,?,?)");
+            $sql2->bind_param("sssssi",$this->nombre, $this->fecha,$this->idiomas,$this->descripcion,$this->genero,$this->idusr);
             $sql2->execute();
             $this->idDoctor=$con->insert_id;
 
-            $sql3 = $con->prepare("INSERT INTO DocEsp(Id_Doctor,Id_Especialidad,Costo,Horario,Dias_labo,DireccionyRef) VALUES (?,?,?,?,?,?)");
-            $sql3->bind_param("iissss",$this->idDoctor,$this->idespecialidad,$this->costo,$this->horario,$this->diaslab,$this->ubicacion);
+            $sql3 = $con->prepare("INSERT INTO DocEsp(Id_Doctor,Id_Especialidad,Cedula,Telefono,Costo,Horario,Dias_labo,DireccionyRef) VALUES (?,?,?,?,?,?,?,?)");
+            $sql3->bind_param("iissssss",$this->idDoctor,$this->idespecialidad,$this->cedula,$this->telefono,$this->costo,$this->horario,$this->diaslab,$this->ubicacion);
             $sql3->execute();
 
             $con->commit();
@@ -201,7 +201,7 @@ class Doctor {
     $lista = [];
     include('conexion.php');
 
-    $sql = 'SELECT * FROM Especialidad;'; 
+    $sql = 'SELECT * FROM Especialidades;'; 
     $resultado = $con->query($sql);
 
     while ($fila = $resultado->fetch_assoc()) {

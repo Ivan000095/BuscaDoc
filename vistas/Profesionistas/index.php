@@ -1,6 +1,7 @@
 <?php
     include('../../modelos/Profesionista.php');
     $profesionista = Profesionista::lista();
+    session_start();
 ?>
 
 <html lang="en">

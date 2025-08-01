@@ -38,5 +38,5 @@
     $Doctor->costo = $_POST['costo'];
     
     $Doctor->save();
-    echo '<meta http-equiv="refresh" content="0;url=/ServiFinder/vistas/Doctores">';
+    echo '<meta http-equiv="refresh" content="0;url=index.php">';
 ?>

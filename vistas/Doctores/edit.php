@@ -1,13 +1,14 @@
 <?php
-include('../../modelos/Doctor.php');
+ include('../../modelos/Doctor.php');
  $idDoctor = $_REQUEST['id'];
  $Doctor = Doctor::find($idDoctor);
  $especialidades = Doctor::finds();
+ session_start();
 ?>
 <html>
   <?php include('../../head.php'); ?>
   <body>
-    <?php include('../../menu.php') ?>
+    <?php include('../../menu.php') ?> 
     <div id="contenido">
         <h1 id="Titulo">Nuevo Doctor</h1>
         <br>
@@ -17,7 +18,7 @@ include('../../modelos/Doctor.php');
                     <div class="col-md-6">
                         <div class="mb-3">
                             <input type="hidden" name="idusr" value="<?php echo $Doctor->idusr ?>">
-                            <label for="nombre" class="form-label">Nombre</label>
+                            <label for="nombre" class="form-label">Nombre<abbr class="text-danger">*</abbr></label>
                             <input type="text" class="form-control" name="nombre" id="nombre" value="<?= $Doctor->nombre ?>" required>
                         </div>
                         <br>

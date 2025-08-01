@@ -17,5 +17,5 @@
     $Doctor->diasLab = $_REQUEST['diaslab'];
     $Doctor->ubicacion = $_REQUEST['ubicacion'];
     $Doctor->save();
-   echo '<meta http-equiv="refresh" content="0;url=/ServiFinder/vistas/Doctores">';
+   echo '<meta http-equiv="refresh" content="0;url=index.php">';
 ?>
