@@ -2,20 +2,36 @@
    <?php 
     include('head.php'); 
    ?>
-    <?php if (isset($_GET['error']) && $_GET['error'] == 1): ?>
-    <script>
-        window.addEventListener('load', () => {
-            var modal = new bootstrap.Modal(document.getElementById('modal'));
-            modal.show();
-        });
-    </script>
-    <?php endif; ?>
+   <head>
+        <style>
+            @media (min-width: 1200px) {
+                .modal-xl {
+                    --bs-modal-width: 500px!important;
+                }
+            }
+
+            @media (min-width: 576px) {
+                .modal {
+                    --bs-modal-margin: 15%;
+                    --bs-modal-box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+                }
+            }
+        </style>
+   </head>
 <body>  
     <?php include('menu.php')?>
     <div id="contenido"> 
         <br>    
         <h1 id="titulo">Inicia sesión</h1>
         <br>
+        <?php if (isset($_GET['error']) && $_GET['error'] == 1){ ?>
+        <script>
+            window.addEventListener('load', () => {
+                var modal = new bootstrap.Modal(document.getElementById('modal'));
+                modal.show();
+            });
+        </script>
+        <?php } ?>
         <form action="validausuario.php" method="POST" enctype="multipart/form-data">
         <div class="row justify-content-center">
             <div class="col-4">
@@ -40,18 +56,22 @@
         </div>
       </form>
     </div>
-    <div class="modal fade" id="modal" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-xl modal-dialog-scrollable">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="modalLabel">Error</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
-                </div>
-                <div class="modal-body text-danger fs-5">
-                        Credenciales Incorrectas
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-outline-success" data-bs-dismiss="modal">Cerrar</button>
+    <div class="row">
+        <div class="col-4">
+            <div class="modal fade" id="modal" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-xl modal-dialog-scrollable">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="modalLabel">Error</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                        </div>
+                        <div class="modal-body text-danger fs-5">
+                                Credenciales Incorrectas
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-outline-success" data-bs-dismiss="modal">Cerrar</button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

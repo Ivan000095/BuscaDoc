@@ -5,12 +5,13 @@ USE buscadoc;
 -- Tabla de usuarios
 CREATE TABLE Usuarios (
   Id_Usuario INT PRIMARY KEY AUTO_INCREMENT,
+  Nombre VARCHAR(50) not null,
   Rol ENUM('Administrador', 'Usuario', 'Doctor') NOT NULL,
   Correo VARCHAR(100) NOT NULL UNIQUE,
   Foto VARCHAR(100) NOT NULL,
   Estado BOOLEAN NOT NULL DEFAULT TRUE,
   FechaCreacion DATE NOT NULL,
-  Password VARCHAR(50) NOT NULL
+  pswd VARCHAR(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- Comentarios generales de la página

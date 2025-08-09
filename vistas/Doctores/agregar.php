@@ -1,7 +1,10 @@
 <?php
+    session_start();
+    if (isset($_SESSION["Rol"]) ) {
     include('../../modelos/Doctor.php');
     $especialidad=Doctor::finds();
 ?>
+
 <html>
   <?php include('../../head.php'); ?>
   <body>
@@ -17,7 +20,7 @@
                         <fieldset>
                             <legend>Información personal</legend>
                             <div class="mb-3">
-                                <label for="nombre" class="form-label">Nombre</label>
+                                <label for="nombre" class="form-label">Nombre</label><abbr class="text-danger">*</abbr>
                                 <input type="text" class="form-control" name="nombre" id="nombre" required>
                             </div>
                             <br>
@@ -126,3 +129,9 @@
     </div>
     <?php include('../../footer.php') ?>
 </body>
+</html>
+<?php 
+    } else {
+      echo '<meta http-equiv="refresh" content="0;url=/BuscaDoc/create.php">';
+    }
+?>

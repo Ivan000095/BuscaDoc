@@ -1,7 +1,7 @@
 <?php
-    include('../../modelos/Doctor.php');
-    include('../../modelos/Usuario.php');
     session_start();
+    if (isset($_SESSION["Rol"]) ) {
+    include('../../modelos/Doctor.php');
     $doctores=Doctor::lista();
 ?>
 
@@ -9,11 +9,10 @@
     <?php  include('../../head.php') ?>
     <body>
         <?php  include('../../menu.php') ?>
-
         <div id="contenido" class="">
         <br>
           <h1 id="titulo">Doctores</h1>
-          <a href="reporte.php" class="btn btn-outline-success" id="btnrepo"><i class="bi bi-filetype-pdf"></i> Reporte en PDF</a>
+          <a href="reporte.php" class="btn btn-outline-success" id="btnrepo" target="blank"><i class="bi bi-filetype-pdf"></i> Reporte en PDF</a>
           <a href="agregar.php" class="btn btn-outline-success" id="btnadd"><i class="bi bi-person-add"></i> Agregar</a>
           <br>
           <br>
@@ -70,3 +69,9 @@
           }
     </script>
 </html>
+
+<?php 
+    } else {
+      echo '<meta http-equiv="refresh" content="0;url=/BuscaDoc/create.php">';
+    }
+?>

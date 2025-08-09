@@ -24,15 +24,18 @@
                     <li class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">Administrar</a>
                         <ul class="dropdown-menu">
-                            <li><a class="dropdown-item" href="/BuscaDoc/vistas/Doctores/index.php?Rol=Administrador">Médicos</a></li>
+                            <li><a class="dropdown-item" href="/BuscaDoc/vistas/Doctores/index.php?Rol=<?php echo $_SESSION['Rol']; ?>">Médicos</a></li>
                             <li><a class="dropdown-item" href="/BuscaDoc/vistas/Establecimientos">Farmacias</a></li>
                         </ul>
                     </li>
                 <?php } ?>
             </ul>
 
-            <?php if (isset($_GET['Rol'])) { ?>
-                <a id="btnlog" class="btn btn-outline-default ms-3" href="/BuscaDoc/" style="width: 5%">
+            <?php if (isset($_SESSION['Rol'])) { ?>
+                <span>
+                    <?php echo $_SESSION['Nombre']; ?><abbr title=""><i class="bi bi-person"></i></abbr>
+                </span>
+                <a id="btnlog" class="btn btn-outline-default ms-3" href="/BuscaDoc/logout.php" style="width: 6%">
                     <i class="bi bi-box-arrow-right"></i> Salir
                 </a>
             <?php } else { ?>

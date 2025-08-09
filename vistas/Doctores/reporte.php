@@ -1,93 +1,22 @@
 <?php
-ob_start();
-include('../../head.php');
-include('../../modelos/Doctor.php');
+require('../../fpdf.php');
+require('../../modelos/Doctor.php');
 $doctor = Doctor::lista();
-?>
-<head>
-    <meta charset="UTF-8">
-    <title>Reporte de Establecimientos</title>
-    <style>
-         #tabla {
-            font-family: Arial, Helvetica, sans-serif;
-            border-collapse: collapse;
-            width: 80%;
-            }
+$pdf = new FPDF('L');
+$pdf->AddPage();
+$pdf->Image('../../img/Ivan.jpg', 10, 8, 20);
+$pdf->SetFont('helvetica','B',16);
+$pdf->Cell(190,10,'Doctores', 0, 1, 'C');
+$pdf->SetFont('helvetica','B',12);
+$pdf->Cell(90,10,'Nombre', 'B', 0, 'C');
+$pdf->Cell(10,10,'', 0, 0, 'C');
+$pdf->Cell(90,10,'Cedula', 'B', 1, 'C');
 
-            #tabla td, #tabla th {
-            border: 1px solid #ddd;
-            padding: 8px;
-            }
+foreach ($doctor as $d) {
+    $pdf->Cell(90,10,$d->nombre, 0, 0, 'C');
+    $pdf->Cell(10,10,'', 0, 0, 'C');
+    $pdf->Cell(90,10,$d->cedula, 0, 1, 'C');
+}
 
-            #tabla tr:nth-child(even){background-color: #f2f2f2;}
-
-            #tabla tr:hover {background-color: #ddd;}
-
-            #tabla th {
-            padding-top: 12px;
-            padding-bottom: 12px;
-            text-align: left;
-            background-color: #04AA6D;
-            color: white;
-            h1 {
-                text-align: center;
-                font-family: Arial, sans-serif;
-            }
-    </style>
-</head>
-<body>
-    <center><h1>Reporte de establecimientos</h1></center>
-     <table id="tabla">
-        <thead>
-            <tr>
-              <th>Especialidad</th>
-              <th>Nombre</th>
-              <th>Cédula</th>
-              <th>Género</th>
-              <th>Costo</th>
-              <th>Horario</th>
-              <th>Días laborales</th>
-              <th>Ubicación</th>
-            </tr>
-         </thead>
-        <tbody>
-            <?php
-            foreach ($doctor as $d){
-            ?>
-            <tr>
-                <td><?php echo $d->nombreespe; ?></td>
-                <td><?php echo $d->nombre; ?></td>
-                <td><?php echo $d->cedula; ?></td>
-                <td><?php echo $d->genero; ?></td>
-                <td>$<?php echo $d->costo; ?></td>
-                <td><?php echo $d->horario; ?></td>
-                <td><?php echo $d->diaslab; ?></td>
-                <td><?php echo $d->ubicacion; ?></td>
-            </tr>
-            <?php
-            }
-            ?>
-        </tbody>  
-    </table>
-</html>
-<?php
-$html=ob_get_clean();
-
-require_once '../../Libreria/autoload.inc.php';
-use Dompdf\Dompdf;
-$dompdf = new Dompdf();
-
-$options= $dompdf->getOptions();
-$options->set(array('isRemoteEnabled'=> true));
-$dompdf->setOptions($options);
-
-$dompdf-> loadHtml($html);
-$dompdf-> setPaper('a4', 'landscape');
-
-$dompdf->render();
-
-$dompdf->stream("reporte_Doctores.pdf", array("Attachment" => true));
-
-
-
+$pdf->Output();
 ?>

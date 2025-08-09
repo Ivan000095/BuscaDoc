@@ -1,9 +1,10 @@
 <?php
- include('../../modelos/Doctor.php');
- $idDoctor = $_REQUEST['id'];
- $Doctor = Doctor::find($idDoctor);
- $especialidades = Doctor::finds();
- session_start();
+    session_start();
+    if (isset($_SESSION["Rol"]) ) {
+    include('../../modelos/Doctor.php');
+    $idDoctor = $_REQUEST['id'];
+    $Doctor = Doctor::find($idDoctor);
+    $especialidades = Doctor::finds();
 ?>
 <html>
   <?php include('../../head.php'); ?>
@@ -122,3 +123,10 @@
     </div>
     <?php include('../../footer.php') ?>
 </body>
+</html>
+
+<?php 
+    } else {
+      echo '<meta http-equiv="refresh" content="0;url=/BuscaDoc/create.php">';
+    }
+?>
