@@ -1,6 +1,8 @@
 <?php
+    session_start();
     include('../../modelos/Doctor.php');
     $Doctor = Doctor::lista();
+    
 ?>
 
 <html lang="en">
@@ -85,10 +87,10 @@
                                                 <label for="estrella<?= $i ?>-<?= $d->idDoctor ?>" class="bi bi-star-fill" required></label>
                                             <?php endfor; ?>
                                         </div>
-                                        <div class="mb-3">
-                                            <label for="nombreusr" class="form-label">Escriba su nombre</label>
-                                            <input type="text" class="form-control" name="nombreusr" id="nombreusr" required>
-                                        </div>
+                                        
+                                            <input type="hidden" name="idu" value="<?php echo $_SESSION['id']; ?>">
+                                        
+                                     
                                         <div class="mb-3">
                                             <textarea class="form-control" name="comentario" rows="3" placeholder="Escribe tu reseña..." required></textarea>
                                         </div>
@@ -107,9 +109,9 @@
                                         <?php while ($r = $resenas->fetch_assoc()): ?>
                                             <div class="d-flex flex-start mb-3">
                                                 <img class="rounded-circle shadow-1-strong me-3"
-                                                    src="../../img/avatar.jpeg" alt="avatar" width="60" height="60" />
+                                                    src="../../<?= htmlspecialchars($r['Foto']) ?>" alt="avatar" width="60" height="60" />
                                                 <div>
-                                                    <h6 class="fw-bold mb-1"><?= htmlspecialchars($r['NombreUsr']) ?></h6>
+                                                    <h6 class="fw-bold mb-1"><?= htmlspecialchars($r['Nombre']) ?></h6>
                                                     <div class="d-flex justify-content-left small text-warning mb-2">
                                                         <?php for ($i = 0; $i < $r['Puntuacion'] ; $i++): ?>
                                                             <div class="bi-star-fill"></div>

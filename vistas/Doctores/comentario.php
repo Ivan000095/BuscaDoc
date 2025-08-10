@@ -4,7 +4,7 @@
     $idDoctor = $_REQUEST['idDoctor'];
     $comentario->puntuacion = $_REQUEST['calificacion'];
     $comentario->comentario = $_REQUEST['comentario'];
-    $comentario->nombreusr = $_REQUEST['nombreusr'];
+    $comentario->id = $_REQUEST['idu'];
     $comentario->saveres($idDoctor);
-    echo '<meta http-equiv="refresh" content="0;url=/ServiFinder/vistas/Doctores/vista.php">';
+    echo '<meta http-equiv="refresh" content="0;url=/BuscaDoc/vistas/Doctores/vista.php?Rol=Usuario">';
 ?>
