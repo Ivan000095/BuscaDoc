@@ -1,6 +1,6 @@
 <?php 
-    require('../../modelos/Establecimiento.php');
-    $establecimiento = new Establecimiento(); 
+    require('../../modelos/Farmacia.php');
+    $Farmacia = new Farmacia(); 
 
     if (isset($_FILES['Foto']) && $_FILES['Foto']['error'] === UPLOAD_ERR_OK) {
     $nombreArchivo = $_FILES['Foto']['name'];
@@ -10,26 +10,26 @@
     $rutaFinal = __DIR__ . '/../../uploads/' . $nombreUnico;
 
     if (move_uploaded_file($tmpPath, $rutaFinal)) {
-        $establecimiento->Foto = $nombreUnico;
+        $Farmacia->Foto = $nombreUnico;
     } else {
         echo "No se pudo mover el archivo.";
-        $establecimiento->Foto = null;
+        $Farmacia->Foto = null;
     }
     } else {
         echo "Error al subir el archivo: " . $_FILES['Foto']['error'];
-        $establecimiento->Foto = null;
+        $Farmacia->Foto = null;
     }
 
 
     // Asignación de otros campos
-    $establecimiento->Nombre = $_REQUEST['Nombre'];
-    $establecimiento->Descripcion = $_REQUEST['Descripcion'];
-    $establecimiento->Horario = $_REQUEST['Horario'];
-    $establecimiento->Dias_labo = $_REQUEST['Dias_labo'];
-    $establecimiento->DireccionyRef = $_REQUEST['DireccionyRef'];
+    $Farmacia->Nombre = $_REQUEST['Nombre'];
+    $Farmacia->Descripcion = $_REQUEST['Descripcion'];
+    $Farmacia->Horario = $_REQUEST['Horario'];
+    $Farmacia->Dias_labo = $_REQUEST['Dias_labo'];
+    $Farmacia->DireccionyRef = $_REQUEST['DireccionyRef'];
 
     // Guardar en la base de datos
-    $establecimiento->save();
+    $Farmacia->save();
 
     echo '<meta http-equiv="refresh" content="0;url=index.php">';
 ?>
