@@ -35,7 +35,7 @@ class Usuario {
     }
     public function Register() {
         include('conexion.php');
-        $sql="INSERT INTO Usuarios(Correo, Foto, pswd, Rol) VALUES('" . $this->correo . "', '" . $this->foto . "', SHA1('" . $this->pswd . "'), 'Usuario')";
+        $sql="INSERT INTO Usuarios(Nombre, Correo, Foto, pswd, Rol) VALUES('" . $this->nombre . "','" . $this->correo . "', '" . $this->foto . "', SHA1('" . $this->pswd . "'), 'Usuario')";
         return $con->query($sql);
     }
 }
