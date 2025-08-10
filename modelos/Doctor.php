@@ -22,7 +22,7 @@ class Doctor {
     public $ubicacion;
     public $puntuacion;
     public $comentario;
-    public $nombreusr;
+    public $id;
 
     //Consulta general
     public static function lista() {
@@ -220,15 +220,20 @@ class Doctor {
         return $con->query($sql);
     }
 
-    public function saveres($id){
+    public function saveres($idDoc){
         include('conexion.php');
-        $sql="INSERT INTO ResenaDoc(Puntuacion, Comentario, NombreUsr, Id_Doctor) VALUES(" . $this->puntuacion . ", '" . $this->comentario . "', '" .$this->nombreusr . "', $id)";
-        return $con->query($sql);
+        $sql="INSERT INTO ResenaDoc(Puntuacion, Comentario, Id_Usuario, Id_Doctor) VALUES(?,?,?,?)";
+        $stmt = $con->prepare($sql);
+        $stmt->bind_param("isii",$this -> puntuacion, $this->comentario, $this->id, $idDoc);
+        $stmt->execute();
+       
     }
 
     public static function findres($id) {
         include('conexion.php');
-        $sql="SELECT * FROM ResenaDoc WHERE Id_Doctor= " . $id;
+        $sql="SELECT ResenaDoc.Puntuacion, ResenaDoc.Comentario,usuarios.Foto, usuarios.Nombre FROM ResenaDoc JOIN usuarios 
+        ON usuarios.Id_Usuario = ResenaDoc.Id_Usuario 
+        WHERE Id_Doctor= " . $id;
         return $con->query($sql);
     }
 
