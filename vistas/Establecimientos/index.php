@@ -1,14 +1,14 @@
 <html>
    <?php 
     include('../../head.php');
-    include('../../modelos/Establecimiento.php');
-    $establecimiento = Establecimiento::lista();
+    include('../../modelos/Farmacia.php');
+    $Farmacia = Farmacia::lista();
     ?>
     <body>
         <?php include('../../menu.php')?>    
         <section id="contenido"> 
         <br>
-        <h1 id="titulo">Establecimientos</h1>
+        <h1 id="titulo">Farmacias</h1>
         <br>
         <a href="reporte.php" class="btn btn-outline-success" id="btnrepo"><i class="bi bi-filetype-pdf"></i> Reporte en PDF</a>
         <a href="create.php" class="btn btn-outline-success" id="btnadd"><i class="bi bi-person-add"></i> Agregar</a>
@@ -25,10 +25,10 @@
                     <th>Puntuacion</th>
                 </tr>
                 <?php 
-                foreach($establecimiento as $e){
+                foreach($Farmacia as $e){
                 ?>
                  <tr>
-                    <td> <?php echo $e->Id_Establecimiento; ?> </td>
+                    <td> <?php echo $e->Id_Farmacia; ?> </td>
                     <td> <?php echo $e->Nombre; ?></td>
                     <td> <?php echo $e->Descripcion; ?></td>
                     <td> <?php echo $e->Horario; ?></td>
@@ -38,13 +38,13 @@
                     <td>
                         <div class="row">
                             <div class="col-6">
-                            <a href="edit.php?Id_Establecimiento=<?php echo $e->Id_Establecimiento; ?>">
+                            <a href="edit.php?Id_Farmacia=<?php echo $e->Id_Farmacia; ?>">
                                 <button style="border: none; background: none;"><i class="bi bi-pencil-fill"></i></button>
                             </a>
                             </div>
                             <div class="col-6">
-                                <form action="destroy.php?Id_Establecimiento=<?php echo $e->Id_Establecimiento; ?>" method="POST" id="form<?php echo $e->Id_Establecimiento;?>" class="inline">
-                                    <button style="border: none; background: none;" type="button" onclick="borrar(<?php echo $e->Id_Establecimiento; ?> ,'<?php echo $e->Nombre; ?>' )"><i class="bi bi-trash-fill"></i></button>
+                                <form action="destroy.php?Id_Farmacia=<?php echo $e->Id_Farmacia; ?>" method="POST" id="form<?php echo $e->Id_Farmacia;?>" class="inline">
+                                    <button style="border: none; background: none;" type="button" onclick="borrar(<?php echo $e->Id_Farmacia; ?> ,'<?php echo $e->Nombre; ?>' )"><i class="bi bi-trash-fill"></i></button>
                                 </form>
                             </div>
                         </div>
@@ -60,7 +60,7 @@
     
         <script type="text/javascript">
             function borrar(id, Nombre){
-               var continuar = confirm('¿Deseas borrar el establecimiento seleccionado? ' + id + " "+ Nombre);
+               var continuar = confirm('¿Deseas borrar el Farmacia seleccionado? ' + id + " "+ Nombre);
                 if(continuar){
                    var formulario = document.getElementById('form' + id);
                     formulario.submit();
