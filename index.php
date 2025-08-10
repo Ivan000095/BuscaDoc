@@ -51,7 +51,7 @@
                             Encuentra fácilmente la farmacia que necesitas, según tu situación o urgencia.
                             <br>
                             <br>
-                            <a class="btn btn-outline-dark" href="/BuscaDoc/vistas/Establecimientos/vista.php"> Ver Farmacias</a>
+                            <a class="btn btn-outline-dark" href="/BuscaDoc/vistas/Farmacias/vista.php"> Ver Farmacias</a>
                         </div>
                     </div>
                 </div>
