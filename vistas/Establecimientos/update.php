@@ -1,14 +1,14 @@
 <?php 
-    require('../../modelos/Establecimiento.php');
-    $Id_Establecimiento = $_REQUEST['Id_Establecimiento'];
-    $establecimiento = Establecimiento::find($Id_Establecimiento);
-    $establecimiento -> Nombre = $_REQUEST['Nombre'];
-    $establecimiento -> Descripcion = $_REQUEST['Descripcion'];
-    $establecimiento -> Horario = $_REQUEST['Horario'];
-    $establecimiento -> Dias_labo = $_REQUEST['Dias_labo'];
-    $establecimiento -> DireccionyRef= $_REQUEST['DireccionyRef'];
+    require('../../modelos/Farmacia.php');
+    $Id_Farmacia = $_REQUEST['Id_Farmacia'];
+    $Farmacia = Farmacia::find($Id_Farmacia);
+    $Farmacia -> Nombre = $_REQUEST['Nombre'];
+    $Farmacia -> Descripcion = $_REQUEST['Descripcion'];
+    $Farmacia -> Horario = $_REQUEST['Horario'];
+    $Farmacia -> Dias_labo = $_REQUEST['Dias_labo'];
+    $Farmacia -> DireccionyRef= $_REQUEST['DireccionyRef'];
 
-    $establecimiento -> save();
+    $Farmacia -> save();
     echo '<meta http-equiv="refresh" content="0;url=index.php">';
 
 ?>
