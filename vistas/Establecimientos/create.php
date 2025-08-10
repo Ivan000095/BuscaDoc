@@ -7,7 +7,7 @@
            
         <div id="contenido"> 
         <br>    
-        <h1 id="titulo">Nuevo Establecimiento</h1>
+        <h1 id="titulo">Nuevo Farmacia</h1>
         <br>
         <form action="store.php" method="POST" enctype="multipart/form-data">
         <div class="row justify-content-center">
