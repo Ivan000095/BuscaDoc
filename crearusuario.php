@@ -24,6 +24,7 @@
     }
 
     // Datos del formulario
+    $usr->nombre = $_POST['Nombre'];
     $usr->correo = $_POST['Correo'];
     $usr->pswd = $_POST['password'];
     $usr->Register();

@@ -17,6 +17,13 @@
         <h1 id="titulo"><i class="bi bi-person-add"></i> Registrarme</h1>
         <br>
         <form action="crearusuario.php" method="POST" enctype="multipart/form-data">
+        <!-- Nombre -->
+        <div class="row justify-content-center">
+            <div class="col-4">
+                <label for="Nombre" class="form-label">Nombre</label>
+                <input type="text" name="Nombre" id="Nombre" class="form-control" required>
+            </div>
+        </div>   
         <!-- Coreeo -->
         <div class="row justify-content-center">
             <div class="col-4">
