@@ -1,10 +1,17 @@
 <?php
+<<<<<<< HEAD
     ini_set('display_errors', 1);
     ini_set('display_startup_errors', 1);
     error_reporting(E_ALL);
     include('../../modelos/Doctor.php');
     $Doctor = Doctor::lista();
     session_start()
+=======
+    session_start();
+    include('../../modelos/Doctor.php');
+    $Doctor = Doctor::lista();
+    
+>>>>>>> 0c0b401631ac69acadb048e8e7288ea10bbeeecb
 ?>
 
 <html lang="en">
@@ -105,6 +112,13 @@
                                                 <label for="estrella<?= $i ?>-<?= $d->idDoctor ?>" class="bi bi-star-fill" required></label>
                                             <?php endfor; ?>
                                         </div>
+<<<<<<< HEAD
+=======
+                                        
+                                            <input type="hidden" name="idu" value="<?php echo $_SESSION['id']; ?>">
+                                        
+                                     
+>>>>>>> 0c0b401631ac69acadb048e8e7288ea10bbeeecb
                                         <div class="mb-3">
                                             <textarea class="form-control" name="comentario" rows="3" placeholder="Escribe tu reseña..." required></textarea>
                                         </div>

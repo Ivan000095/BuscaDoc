@@ -9,12 +9,21 @@
         $nombreUnico = uniqid() . '_' . basename($nombreArchivo);
         $rutaFinal = __DIR__ . '/../../uploads/' . $nombreUnico;
 
+<<<<<<< HEAD
         if (move_uploaded_file($tmpPath, $rutaFinal)) {
                 $Farmacia->Foto = $nombreUnico;
             } else {
                 echo "No se pudo mover el archivo.";
                 $Farmacia->Foto = null;
             }
+=======
+    if (move_uploaded_file($tmpPath, $rutaFinal)) {
+        $Farmacia->Foto = $nombreUnico;
+    } else {
+        echo "No se pudo mover el archivo.";
+        $Farmacia->Foto = null;
+    }
+>>>>>>> 0c0b401631ac69acadb048e8e7288ea10bbeeecb
     } else {
         echo "Error al subir el archivo: " . $_FILES['Foto']['error'];
         $Farmacia->Foto = null;
@@ -31,5 +40,9 @@
     // Guardar en la base de datos
     $Farmacia->save();
 
+<<<<<<< HEAD
     echo '<meta http-equiv="refresh" content="0;url=index.php?agregado=1">';
+=======
+    echo '<meta http-equiv="refresh" content="0;url=index.php">';
+>>>>>>> 0c0b401631ac69acadb048e8e7288ea10bbeeecb
 ?>

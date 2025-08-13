@@ -41,6 +41,7 @@ class Usuario {
 
     public function Register() {
         include('conexion.php');
+<<<<<<< HEAD
         if($this->id==0){
             try {
                 $con->begin_transaction();
@@ -89,6 +90,10 @@ class Usuario {
                 return false; 
             }
         }
+=======
+        $sql="INSERT INTO Usuarios(Nombre, Correo, Foto, pswd, Rol) VALUES('" . $this->nombre . "','" . $this->correo . "', '" . $this->foto . "', SHA1('" . $this->pswd . "'), 'Usuario')";
+        return $con->query($sql);
+>>>>>>> 0c0b401631ac69acadb048e8e7288ea10bbeeecb
     }
 
     public static function buscar($id) {

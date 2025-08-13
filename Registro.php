@@ -18,12 +18,23 @@
         <h1 id="titulo"><i class="bi bi-person-add"></i> Registrarme</h1>
         <br>
         <form action="crearusuario.php" method="POST" enctype="multipart/form-data">
+<<<<<<< HEAD
         <div class="row justify-content-center">
             <div class="col-4">
                 <label for="nombre" class="form-label">Nombre</label>
                 <input type="text" name="nombre" id="nombre" class="form-control" required>
             </div>
         </div>
+=======
+        <!-- Nombre -->
+        <div class="row justify-content-center">
+            <div class="col-4">
+                <label for="Nombre" class="form-label">Nombre</label>
+                <input type="text" name="Nombre" id="Nombre" class="form-control" required>
+            </div>
+        </div>   
+        <!-- Coreeo -->
+>>>>>>> 0c0b401631ac69acadb048e8e7288ea10bbeeecb
         <div class="row justify-content-center">
             <div class="col-4">
                 <label for="Correo" class="form-label">Correo</label>

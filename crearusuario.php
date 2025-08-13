@@ -22,7 +22,11 @@
     }
 
     // Datos del formulario
+<<<<<<< HEAD
     $usr->nombre = $_POST['nombre'];
+=======
+    $usr->nombre = $_POST['Nombre'];
+>>>>>>> 0c0b401631ac69acadb048e8e7288ea10bbeeecb
     $usr->correo = $_POST['Correo'];
     $usr->pswd = $_POST['password'];
     $usr->fecha = $_POST['fecha'];

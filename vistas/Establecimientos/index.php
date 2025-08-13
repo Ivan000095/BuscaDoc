@@ -5,7 +5,15 @@
     $Farmacia = Farmacia::lista();
 ?>
 <html>
+<<<<<<< HEAD
     <?php include('../../head.php'); ?>
+=======
+   <?php 
+    include('../../head.php');
+    include('../../modelos/Farmacia.php');
+    $Farmacia = Farmacia::lista();
+    ?>
+>>>>>>> 0c0b401631ac69acadb048e8e7288ea10bbeeecb
     <body>
 
         <?php if (isset($_GET['agregado']) && $_GET['agregado'] == 1){ ?>
@@ -130,9 +138,12 @@
 
     </body>
 </html>
+<<<<<<< HEAD
 
 <?php 
     } else {
       echo '<meta http-equiv="refresh" content="0;url=/BuscaDoc/create.php?advertencia=1">';
     }
 ?>
+=======
+>>>>>>> 0c0b401631ac69acadb048e8e7288ea10bbeeecb

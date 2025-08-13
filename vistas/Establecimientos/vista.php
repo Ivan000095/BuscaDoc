@@ -1,6 +1,9 @@
 
 <?php
+<<<<<<< HEAD
     session_start();
+=======
+>>>>>>> 0c0b401631ac69acadb048e8e7288ea10bbeeecb
     include('../../modelos/Farmacia.php');
     $Farmacia = Farmacia::lista();
 ?>
