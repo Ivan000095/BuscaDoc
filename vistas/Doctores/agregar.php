@@ -1,6 +1,6 @@
 <?php
     session_start();
-    if (isset($_SESSION["Rol"]) ) {
+    if (isset($_SESSION["Rol"]) && $_SESSION['Rol'] == 'Administrador') {
     include('../../modelos/Doctor.php');
     $especialidad=Doctor::finds();
 ?>
@@ -132,6 +132,6 @@
 </html>
 <?php 
     } else {
-      echo '<meta http-equiv="refresh" content="0;url=/BuscaDoc/create.php">';
+      echo '<meta http-equiv="refresh" content="0;url=/BuscaDoc/create.php?advertencia=1">';
     }
 ?>

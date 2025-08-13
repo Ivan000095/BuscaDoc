@@ -22,7 +22,7 @@ class Doctor {
     public $ubicacion;
     public $puntuacion;
     public $comentario;
-    public $nombreusr;
+    public $id;
 
     //Consulta general
     public static function lista() {
@@ -32,12 +32,12 @@ class Doctor {
         $sql = 'SELECT
         Doctores.Id_Doctor AS idDoctor, 
         Especialidades.Nombre AS nombreespe,
-        Doctores.Nombre AS nombre,
+        Usuarios.Nombre AS nombre,
         DocEsp.Cedula AS cedula,
         Usuarios.correo AS correo, 
         Usuarios.Foto AS foto,
         TIMESTAMPDIFF(YEAR, Doctores.F_Nacimiento, CURDATE()) AS edad,
-        AVG(resenadoc.Puntuacion) AS puntuacion,
+        (SELECT AVG(ResenaDoc.Puntuacion) FROM ResenaDoc where ResenaDoc.Id_Doctor = Doctores.Id_Doctor) AS Puntuacion,
         DocEsp.Telefono  AS telefono,
         Doctores.F_Nacimiento  AS  fecha,
         Doctores.Idioma  AS  idiomas,
@@ -51,8 +51,7 @@ class Doctor {
         JOIN Usuarios ON Doctores.Id_Usuario = Usuarios.Id_Usuario
         JOIN DocEsp ON Doctores.Id_Doctor = DocEsp.Id_Doctor
         JOIN Especialidades ON DocEsp.Id_Especialidad = Especialidades.Id_Especialidad
-        left JOIN ResenaDoc ON resenadoc.Id_Doctor=doctores.Id_Doctor
-        GROUP BY doctores.Id_Doctor;
+        left JOIN ResenaDoc ON ResenaDoc.Id_Doctor=Doctores.Id_Doctor;
         ';
 
         $resultado = $con->query($sql);
@@ -71,7 +70,7 @@ class Doctor {
             $doctor->descripcion = $fila['descripcion'];
             $doctor->genero = $fila['genero'];
             $doctor->costo = $fila['costo'];
-            $doctor->puntuacion = $fila['puntuacion'];
+            $doctor->puntuacion = $fila['Puntuacion'];
             $doctor->horario = $fila['horario'];
             $doctor->diaslab = $fila['diaslab'];
             $doctor->ubicacion = $fila['ubicacion'];
@@ -90,7 +89,7 @@ class Doctor {
         Doctores.Id_Doctor AS idDoctor, 
         Especialidades.Nombre AS nombreespe,
         Usuarios.Id_Usuario As idusr,
-        Doctores.Nombre AS nombre,
+        Usuarios.Nombre AS nombre,
         DocEsp.Cedula AS cedula,
         Usuarios.Correo AS correo, 
         Usuarios.Foto AS foto,
@@ -132,7 +131,6 @@ class Doctor {
             $doctor->ubicacion = $fila['ubicacion'];
             return $doctor;
         }
-
         return NULL;
     }
 
@@ -142,14 +140,15 @@ class Doctor {
         if( $this->idDoctor==0 ) {
            try{
             $rol='Doctor';
+            $pswd=SHA1($this->password);
             $con->begin_transaction();
-            $sql1 = $con->prepare("INSERT INTO Usuarios(correo, Foto, pswd, Rol) VALUES (?,?,?,?)");
-            $sql1->bind_param("ssss", $this->correo, $this->foto, $this->password, $rol);
+            $sql1 = $con->prepare("INSERT INTO Usuarios(correo, Nombre, Foto, pswd, Rol) VALUES (?,?,?,?,?)");
+            $sql1->bind_param("sssss", $this->correo, $this->nombre, $this->foto, $pswd, $rol);
             $sql1->execute();
             $this->idusr=$con->insert_id;
 
-            $sql2 = $con->prepare("INSERT INTO Doctores(Nombre,F_Nacimiento,Idioma,Descripcion,Genero,Id_Usuario) VALUES (?,?,?,?,?,?)");
-            $sql2->bind_param("sssssi",$this->nombre, $this->fecha,$this->idiomas,$this->descripcion,$this->genero,$this->idusr);
+            $sql2 = $con->prepare("INSERT INTO Doctores(F_Nacimiento,Idioma,Descripcion,Genero,Id_Usuario) VALUES (?,?,?,?,?)");
+            $sql2->bind_param("ssssi", $this->fecha,$this->idiomas,$this->descripcion,$this->genero,$this->idusr);
             $sql2->execute();
             $this->idDoctor=$con->insert_id;
 
@@ -171,16 +170,16 @@ class Doctor {
         } else {
             try{
             $con->begin_transaction();
-            $sql1 = $con->prepare("UPDATE Usuarios SET correo = ?, password = ? WHERE  Id_Usuario = ?");
-            $sql1->bind_param("sss", $this->correo, $this->password, $this->idusr);
+            $sql1 = $con->prepare("UPDATE Usuarios SET Correo=?, Nombre=? WHERE Id_Usuario = ?");
+            $sql1->bind_param("ssi", $this->correo, $this->nombre, $this->idusr);
             $sql1->execute();
 
-            $sql2 = $con->prepare("UPDATE Doctores SET Nombre = ?,Cedula = ?,Telefono = ?,F_Nacimiento = ?,Idioma = ?,Descripcion = ?,Genero = ?,Id_Doctor = ?");
-            $sql2->bind_param("sssssssi",$this->nombre,$this->cedula,$this->telefono,$this->fecha,$this->idiomas,$this->descripcion,$this->genero,$this->idDoctor);
+            $sql2 = $con->prepare("UPDATE Doctores SET F_Nacimiento = ?,Idioma = ?,Descripcion = ?,Genero = ? WHERE Id_Doctor = ?");
+            $sql2->bind_param("ssssi", $this->fecha, $this->idiomas, $this->descripcion, $this->genero, $this->idDoctor);
             $sql2->execute();
 
-            $sql3 = $con->prepare("UPDATE DocEsp SET Id_es = ?, Costo = ?, Horario = ?, Dias_labo = ?, DireccionyRef = ? WHERE Id_Doctor = ?");
-            $sql3->bind_param("idsssi",$this->idespecialidad,$this->costo,$this->horario,$this->diaslab,$this->ubicacion,$this->idDoctor);
+            $sql3 = $con->prepare("UPDATE DocEsp SET Id_Especialidad=?, Cedula=?, Telefono=?, Costo = ?, Horario = ?, Dias_labo = ?, DireccionyRef = ? WHERE Id_Doctor = ?");
+	    $sql3->bind_param("issdsssi",$this->idespecialidad,$this->cedula, $this->telefono,$this->costo,$this->horario,$this->diaslab,$this->ubicacion,$this->idDoctor);
             $sql3->execute();
 
             $con->commit();
@@ -220,18 +219,22 @@ class Doctor {
         return $con->query($sql);
     }
 
-    public function saveres($id){
+    public function saveres($idDoc){
         include('conexion.php');
-        $sql="INSERT INTO ResenaDoc(Puntuacion, Comentario, NombreUsr, Id_Doctor) VALUES(" . $this->puntuacion . ", '" . $this->comentario . "', '" .$this->nombreusr . "', $id)";
-        return $con->query($sql);
+        $sql="INSERT INTO ResenaDoc(Puntuacion, Comentario, Id_Usuario, Id_Doctor) VALUES(?,?,?,?)";
+        $stmt = $con->prepare($sql);
+        $stmt->bind_param("isii",$this -> puntuacion, $this->comentario, $this->id, $idDoc);
+        $stmt->execute();
+       
     }
 
     public static function findres($id) {
         include('conexion.php');
-        $sql="SELECT * FROM ResenaDoc WHERE Id_Doctor= " . $id;
+        $sql="SELECT ResenaDoc.Puntuacion, ResenaDoc.Comentario,usuarios.Foto, usuarios.Nombre FROM ResenaDoc JOIN usuarios 
+        ON usuarios.Id_Usuario = ResenaDoc.Id_Usuario 
+        WHERE Id_Doctor= " . $id;
         return $con->query($sql);
     }
-
 }
 
 ?>

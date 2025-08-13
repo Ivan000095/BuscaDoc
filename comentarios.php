@@ -10,6 +10,8 @@
         <?php include ('menu.php')?>        
         <!-- Reseñas -->
         <section style="margin: 5%;" id="contenido">
+
+            <?php if (isset($_SESSION['Rol'])) {?>
             <h5>Agrega una reseña</h5>
             <form action="comentar.php" method="POST">
                 <input type="hidden" name="id" value="<?php echo $_SESSION['id']; ?>">
@@ -20,10 +22,13 @@
                     <button type="submit" class="btn btn-outline-success" id="btnres">Enviar Reseña</button>
                 </div>
             </form>
+            <?php } else {?>
+                <h5>Inicie sesión para agregar una reseña</h5>
+            <?php }?>
+
             <hr>
             <!-- Comentarios -->
             <?php $comentarios = Comentario::findcom(); ?>
-
             <h5>Comentarios recientes</h5>
             <?php if ($comentarios && $comentarios->num_rows > 0): ?>
                 <?php while ($r = $comentarios->fetch_assoc()): ?>
@@ -31,7 +36,7 @@
                         <img class="rounded-circle shadow-1-strong me-3"
                             src="<?= htmlspecialchars($r['Foto']) ?>" alt="avatar" width="60" height="60" />
                         <div>
-                            <h6 class="fw-bold mb-1"><?= htmlspecialchars($r['Nombre']) ?></h6>
+                            <strong><h6 class="fw-bold mb-1"><?= htmlspecialchars($r['Nombre']) ?></strong>, <?php echo htmlspecialchars($r['FechaHora']) ?></h6>
                             <p class="mb-0"><?= htmlspecialchars($r['Comentario']) ?></p>
                         </div>
                     </div>

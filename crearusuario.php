@@ -1,8 +1,6 @@
 <?php
     require('modelos/Usuario.php');
-
     $usr = new Usuario();
-
     // Subida de imagen
     if (isset($_FILES['foto']) && $_FILES['foto']['error'] === UPLOAD_ERR_OK) {
         $nombreArchivo = $_FILES['foto']['name'];
@@ -24,8 +22,11 @@
     }
 
     // Datos del formulario
+    $usr->nombre = $_POST['nombre'];
     $usr->correo = $_POST['Correo'];
     $usr->pswd = $_POST['password'];
+    $usr->fecha = $_POST['fecha'];
+    $usr->genero = $_POST['genero'];
     $usr->Register();
-    echo '<meta http-equiv="refresh" content="0;url=create.php">';
+    echo '<meta http-equiv="refresh" content="0;url=create.php?usuariocreado=1">';
 ?>

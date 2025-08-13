@@ -52,7 +52,7 @@ footer {
 }
 
 #tabla-catalogo {
-    width: 97%;
+    width: 90%;
     margin: auto;
 }
 
@@ -240,3 +240,35 @@ footer {
     color: #111d1b!important;
 }
 
+.dropdown-menu {
+  list-style: none!important;
+  padding-left: 0!important;
+}
+
+#cant {
+    right: -35%;
+    position: relative;
+    top: 3%;
+}
+
+#elementos {
+    position: relative;
+    right: 5%
+}
+
+.lista {
+    width: 97%!important;
+    margin: auto;
+}
+
+#pel {
+    width: 15%!important;
+}
+
+.btn-success {
+    background-color: #4b7d84 !important;
+}
+
+.link-success {
+    color: #4b7d84 !important
+}

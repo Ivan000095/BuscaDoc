@@ -1,13 +1,13 @@
 <?php 
 ob_start();
-include('../../modelos/Establecimiento.php'); 
-$establecimiento = Establecimiento::lista();
+include('../../modelos/Farmacia.php'); 
+$Farmacia = Farmacia::lista();
 ?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Reporte de Establecimientos</title>
+    <title>Reporte de Farmacias</title>
     <style>
          #tabla {
             font-family: Arial, Helvetica, sans-serif;
@@ -37,7 +37,7 @@ $establecimiento = Establecimiento::lista();
     </style>
 </head>
 <body>
-    <center><h1>Reporte de establecimientos</h1></center>
+    <center><h1>Reporte de Farmacias</h1></center>
     <table id="tabla">
         <thead>
             <tr>
@@ -50,9 +50,9 @@ $establecimiento = Establecimiento::lista();
             </tr>
         </thead>
         <tbody>
-            <?php foreach($establecimiento as $e): ?>
+            <?php foreach($Farmacia as $e): ?>
             <tr>
-                <td><?= $e->Id_Establecimiento; ?></td>
+                <td><?= $e->Id_Farmacia; ?></td>
                 <td><?= $e->Nombre; ?></td>
                 <td><?= $e->Descripcion; ?></td>
                 <td><?= $e->Horario; ?></td>
@@ -77,5 +77,5 @@ $dompdf->setOptions($options);
 $dompdf->loadHtml($html);
 $dompdf->setPaper('letter');
 $dompdf->render();
-$dompdf->stream("reporte_Establecimientos.pdf", array("Attachment" => true));
+$dompdf->stream("reporte_Farmacias.pdf", array("Attachment" => true));
 ?>

@@ -3,5 +3,5 @@
     $id = $_REQUEST['idDoctor'];
     $Doctor = Doctor::find($id);
     $Doctor->destroy();
-    echo '<meta http-equiv="refresh" content="0;url=index.php">';
+    echo '<meta http-equiv="refresh" content="0;url=index.php?Rol=Administrador">';
 ?>

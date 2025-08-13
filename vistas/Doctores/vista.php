@@ -1,17 +1,26 @@
 <?php
+    ini_set('display_errors', 1);
+    ini_set('display_startup_errors', 1);
+    error_reporting(E_ALL);
     include('../../modelos/Doctor.php');
     $Doctor = Doctor::lista();
+    session_start()
 ?>
 
 <html lang="en">
     <?php  include('../../head.php') ?>
-    <style>
-
-    </style>
     <body>
-        <?php  include('../../menu.php') ?>
+        <?php if (isset($_GET['cita']) && $_GET['cita'] == 1){ ?>
+        <script>
+            window.addEventListener('load', () => {
+                var modal = new bootstrap.Modal(document.getElementById('modal2'));
+                modal.show();
+            });
+        </script>
+        <?php  }
+        include('../../menu.php') ?>
 
-        <div id="contenido" class="">
+        <div id="contenido">
             <br>
             <h1 id="titulo">Doctores</h1> 
             <section class="py-5">
@@ -28,7 +37,7 @@
                                     <h5><?= $d->nombreespe; ?></h5>
                                     <h5 class="fw-bolder"><?= $d->nombre; ?></h5>
                                     <div class="d-flex justify-content-center small text-warning mb-2">
-                                        <?php for($i=1; $i<=round($d->puntuacion); $i++) { ?>
+                                        <?php for($i=1; $i<=round($d->puntuacion ?? 0); $i++) { ?>
                                             <div class="bi-star-fill"></div>
                                         <?php
                                             }
@@ -51,7 +60,7 @@
                         <div class="modal-dialog modal-xl modal-dialog-scrollable">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title" id="modalLabel<?= $d->id ?>"><?= $d->nombre ?></h5>
+                                    <h5 class="modal-title" id="modalLabel<?= $d->idDoctor ?>"><?= $d->nombre ?></h5>
                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
                                 </div>
                                 <div class="modal-body">
@@ -62,22 +71,33 @@
                                             </div>
                                             <div class="col-md-6">
                                                 <ul class="list-unstyled mb-4">
-                                                    <li><strong>Edad:</strong> <?= $d->edad ?> años</li>
-                                                    <li><strong>Sexo:</strong> <?= $d->genero ?></li>
-                                                    <li><strong>Idiomas:</strong> <?= $d->idiomas ?></li>
-                                                    <li><strong>Horario y días de atención:</strong> <?= $d->diaslab ?>, <?= $d->horario ?></li>
-                                                    <li><strong>Costo del servicio:</strong> $<?= $d->costo ?></li>
-                                                    <li><strong>Ubicación:</strong> <?= $d->ubicacion ?></li>
+                                                    <li><strong>Edad:</strong> <?php echo $d->edad ?> años</li>
+                                                    <li><strong>Sexo:</strong> <?php echo$d->genero ?></li>
+                                                    <li><strong>Idiomas:</strong> <?php echo $d->idiomas ?></li>
+                                                    <li><strong>Horario y días de atención:</strong> <?php echo $d->diaslab ?>, <?php echo $d->horario ?></li>
+                                                    <li><strong>Costo del servicio:</strong> $<?php echo $d->costo ?></li>
+                                                    <li><strong>Ubicación:</strong> <?php echo $d->ubicacion ?></li>
                                                 </ul>
                                                 <p><?= $d->descripcion ?></p>
-                                                <p><i class="bi bi-whatsapp"></i> <strong>Teléfono:</strong> <?= $d->telefono ?></p>
+                                                <div class="row align-content-center">
+                                                    <div class="col-5">
+                                                        <p><i class="bi bi-whatsapp"></i> <strong>Teléfono:</strong> <?= $d->telefono ?></p>
+                                                    </div>
+                                                    <?php if(isset($_SESSION['Rol']) && $_SESSION['Rol'] == 'Usuario') { ?>
+                                                        <div class="col-4">
+                                                            <a class="btn btn-outline-success" href="cita.php?idDoctor=<?php echo $d->idDoctor; ?>&Rol=<?php echo $_SESSION['Rol']; ?>"><i class="bi bi-calendar-date"></i> Hacer cita</a>
+                                                        </div>
+                                                    <?php } ?>
+                                                </div>   
                                             </div>
                                         </div>
                                     </div>
 
                                     <!-- Reseñas -->
-                                    <h5>Agrega una reseña</h5>
+                                     <?php if(isset($_SESSION['Rol'])) { ?>
+                                        <h5>Agrega una reseña</h5>
                                     <form action="comentario.php?id=<?php echo $d->idDoctor; ?>" method="POST">
+                                        <input type="hidden" name="idu" value="<?php echo $_SESSION['id']; ?>">
                                         <input type="hidden" name="idDoctor" value="<?= $d->idDoctor ?>">
                                         <div class="star-rating mb-3">
                                             <?php for ($i = 5; $i >= 1; $i--): ?>
@@ -86,16 +106,15 @@
                                             <?php endfor; ?>
                                         </div>
                                         <div class="mb-3">
-                                            <label for="nombreusr" class="form-label">Escriba su nombre</label>
-                                            <input type="text" class="form-control" name="nombreusr" id="nombreusr" required>
-                                        </div>
-                                        <div class="mb-3">
                                             <textarea class="form-control" name="comentario" rows="3" placeholder="Escribe tu reseña..." required></textarea>
                                         </div>
                                         <div class="text-end">
                                             <button type="submit" class="btn btn-outline-success">Enviar Reseña</button>
                                         </div>
-                                    </form>
+                                    </form>    
+                                    <?php } else {?>
+                                        <center><h5>Inicie sesión para agregar una reseña</h5></center>
+                                    <?php } ?>
 
                                     <hr>
 
@@ -107,9 +126,9 @@
                                         <?php while ($r = $resenas->fetch_assoc()): ?>
                                             <div class="d-flex flex-start mb-3">
                                                 <img class="rounded-circle shadow-1-strong me-3"
-                                                    src="../../img/avatar.jpeg" alt="avatar" width="60" height="60" />
+                                                    src="../../<?= htmlspecialchars($r['Foto']) ?>" alt="avatar" width="60" height="60" />
                                                 <div>
-                                                    <h6 class="fw-bold mb-1"><?= htmlspecialchars($r['NombreUsr']) ?></h6>
+                                                    <h6 class="fw-bold mb-1"><?= htmlspecialchars($r['Nombre']) ?></h6>
                                                     <div class="d-flex justify-content-left small text-warning mb-2">
                                                         <?php for ($i = 0; $i < $r['Puntuacion'] ; $i++): ?>
                                                             <div class="bi-star-fill"></div>
@@ -135,6 +154,26 @@
                 </div>
             </div>
             </section>
+        
+        <div class="row">
+            <div class="col-4">
+                <div class="modal fade" id="modal2" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-xl modal-dialog-scrollable">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                            </div>
+                            <div class="modal-body text-success fs-5">
+                                    Cita realizada con éxito
+                            </div>
+                            <div class="modal-footer">
+                                <a href="vista.php?Rol=<?php echo $_SESSION['Rol']; ?>"><button type="button" class="btn btn-outline-success" >Cerrar</button></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
         </div>
         <br>

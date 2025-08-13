@@ -1,19 +1,39 @@
+<?php
+   session_start();
+   if (isset($_SESSION["Rol"]) && $_SESSION['Rol'] == 'Administrador') {
+    include('../../modelos/Farmacia.php');
+    $Farmacia = Farmacia::lista();
+?>
 <html>
-   <?php 
-    include('../../head.php');
-    include('../../modelos/Establecimiento.php');
-    $establecimiento = Establecimiento::lista();
-    ?>
+    <?php include('../../head.php'); ?>
     <body>
+
+        <?php if (isset($_GET['agregado']) && $_GET['agregado'] == 1){ ?>
+        <script>
+            window.addEventListener('load', () => {
+                var modal = new bootstrap.Modal(document.getElementById('modal'));
+                modal.show();
+            });
+        </script>
+        <?php } elseif (isset($_GET['cambio']) && $_GET['cambio'] == 1){ ?>
+        <script>
+            window.addEventListener('load', () => {
+                var modal = new bootstrap.Modal(document.getElementById('modal2'));
+                modal.show();
+            });
+        </script>
+        <?php } ?>
+    
         <?php include('../../menu.php')?>    
         <section id="contenido"> 
         <br>
-        <h1 id="titulo">Establecimientos</h1>
+        <h1 id="titulo">Farmacias</h1>
         <br>
         <a href="reporte.php" class="btn btn-outline-success" id="btnrepo"><i class="bi bi-filetype-pdf"></i> Reporte en PDF</a>
         <a href="create.php" class="btn btn-outline-success" id="btnadd"><i class="bi bi-person-add"></i> Agregar</a>
-        <br> 
+        <br>
             <table class="table table-striped" id="tabla-catalogo">
+                <br>
                 <tr>
                     <th>Id</th>
                     <th>Nombre</th>
@@ -25,10 +45,10 @@
                     <th>Puntuacion</th>
                 </tr>
                 <?php 
-                foreach($establecimiento as $e){
+                foreach($Farmacia as $e){
                 ?>
                  <tr>
-                    <td> <?php echo $e->Id_Establecimiento; ?> </td>
+                    <td> <?php echo $e->Id_Farmacia; ?> </td>
                     <td> <?php echo $e->Nombre; ?></td>
                     <td> <?php echo $e->Descripcion; ?></td>
                     <td> <?php echo $e->Horario; ?></td>
@@ -38,13 +58,13 @@
                     <td>
                         <div class="row">
                             <div class="col-6">
-                            <a href="edit.php?Id_Establecimiento=<?php echo $e->Id_Establecimiento; ?>">
+                            <a href="edit.php?Id_Farmacia=<?php echo $e->Id_Farmacia; ?>">
                                 <button style="border: none; background: none;"><i class="bi bi-pencil-fill"></i></button>
                             </a>
                             </div>
                             <div class="col-6">
-                                <form action="destroy.php?Id_Establecimiento=<?php echo $e->Id_Establecimiento; ?>" method="POST" id="form<?php echo $e->Id_Establecimiento;?>" class="inline">
-                                    <button style="border: none; background: none;" type="button" onclick="borrar(<?php echo $e->Id_Establecimiento; ?> ,'<?php echo $e->Nombre; ?>' )"><i class="bi bi-trash-fill"></i></button>
+                                <form action="destroy.php?Id_Farmacia=<?php echo $e->Id_Farmacia; ?>" method="POST" id="form<?php echo $e->Id_Farmacia;?>" class="inline">
+                                    <button style="border: none; background: none;" type="button" onclick="borrar(<?php echo $e->Id_Farmacia; ?> ,'<?php echo $e->Nombre; ?>' )"><i class="bi bi-trash-fill"></i></button>
                                 </form>
                             </div>
                         </div>
@@ -57,16 +77,62 @@
         </section>
       
         <?php include('../../footer.php')?>
+
+        <div class="row">
+            <div class="col-4">
+                <div class="modal fade" id="modal" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-xl modal-dialog-scrollable">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                            </div>
+                            <div class="modal-body text-success fs-5">
+                                    farmacia agregada con éxito
+                            </div>
+                            <div class="modal-footer">
+                                <a href="index.php?Rol=<?php echo $_SESSION['Rol']; ?>"><button type="button" class="btn btn-outline-success" >Cerrar</button></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-4">
+                <div class="modal fade" id="modal2" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-xl modal-dialog-scrollable">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                            </div>
+                            <div class="modal-body text-success fs-5">
+                                    Cambios registrados
+                            </div>
+                            <div class="modal-footer">
+                                <a href="index.php?Rol=<?php echo $_SESSION['Rol']; ?>"><button type="button" class="btn btn-outline-success" >Cerrar</button></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     
         <script type="text/javascript">
             function borrar(id, Nombre){
-               var continuar = confirm('¿Deseas borrar el establecimiento seleccionado? ' + id + " "+ Nombre);
+               var continuar = confirm('¿Deseas borrar el Farmacia seleccionado? ' + id + " "+ Nombre);
                 if(continuar){
                    var formulario = document.getElementById('form' + id);
                     formulario.submit();
                 }
             }
-
         </script>
+
     </body>
 </html>
+
+<?php 
+    } else {
+      echo '<meta http-equiv="refresh" content="0;url=/BuscaDoc/create.php?advertencia=1">';
+    }
+?>

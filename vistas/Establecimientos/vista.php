@@ -1,7 +1,8 @@
 
 <?php
-    include('../../modelos/Establecimiento.php');
-    $establecimiento = Establecimiento::lista();
+    session_start();
+    include('../../modelos/Farmacia.php');
+    $Farmacia = Farmacia::lista();
 ?>
 
 <html lang="en">
@@ -14,12 +15,12 @@
 
         <div id="contenido" class="">
             <br>
-            <h1 id="titulo">Establecimientos</h1> 
+            <h1 id="titulo">Farmacias</h1> 
             <section class="py-5">
             <div class="container px-4 px-lg-5 mt-5">
                 <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
                     <?php 
-                        foreach ($establecimiento as $e){
+                        foreach ($Farmacia as $e){
                     ?>
                     <div class="col mb-5">
                         <div class="card h-100">
@@ -38,19 +39,19 @@
                             </div>
                             <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
                                 <div class="text-center">
-                                    <button type="button" class="btn btn-outline-servi mt-auto" data-bs-toggle="modal" data-bs-target="#modal<?= $e->Id_Establecimiento ?>">
-                                        Ver Establecimiento
+                                    <button type="button" class="btn btn-outline-dark mt-auto" data-bs-toggle="modal" data-bs-target="#modal<?= $e->Id_Farmacia ?>">
+                                        Ver Farmacia
                                     </button>
                                 </div>
                             </div>
                         </div>
                     </div>
                     
-                    <div class="modal fade" id="modal<?= $e->Id_Establecimiento ?>" tabindex="-1" aria-labelledby="modalLabel<?= $e->Id_Establecimiento ?>" aria-hidden="true">
+                    <div class="modal fade" id="modal<?= $e->Id_Farmacia ?>" tabindex="-1" aria-labelledby="modalLabel<?= $e->Id_Farmacia ?>" aria-hidden="true">
                         <div class="modal-dialog modal-xl modal-dialog-scrollable">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title" id="modalLabel<?= $e->Id_Establecimiento ?>"><?= $e->Nombre ?></h5>
+                                    <h5 class="modal-title" id="modalLabel<?= $e->Id_Farmacia ?>"><?= $e->Nombre ?></h5>
                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
                                 </div>
                                 <div class="modal-body">
@@ -72,12 +73,12 @@
 
                                     <!-- Reseñas -->
                                     <h5>Agrega una reseña</h5>
-                                    <form action="comentario.php?Id_Establecimiento=<?php echo $e->Id_Establecimiento; ?>" method="POST">
-                                        <input type="hidden" name="Id_Establecimiento" value="<?= $e->Id_Establecimiento ?>">
+                                    <form action="comentario.php?Id_Farmacia=<?php echo $e->Id_Farmacia; ?>" method="POST">
+                                        <input type="hidden" name="Id_Farmacia" value="<?= $e->Id_Farmacia ?>">
                                         <div class="star-rating mb-3">
                                             <?php for ($i = 5; $i >= 1; $i--): ?>
-                                                <input type="radio" id="estrella<?= $i ?>-<?= $e->Id_Establecimiento ?>" name="Puntuacion" value="<?= $i ?>"/>
-                                                <label for="estrella<?= $i ?>-<?= $e->Id_Establecimiento ?>" class="bi bi-star-fill" required></label>
+                                                <input type="radio" id="estrella<?= $i ?>-<?= $e->Id_Farmacia ?>" name="Puntuacion" value="<?= $i ?>"/>
+                                                <label for="estrella<?= $i ?>-<?= $e->Id_Farmacia ?>" class="bi bi-star-fill" required></label>
                                             <?php endfor; ?>
                                         </div>
                                         <div class="mb-3">
@@ -94,7 +95,7 @@
                                     <hr>
 
                                     <!-- Comentarios -->
-                                    <?php $resenas = Establecimiento::findres($e->Id_Establecimiento); ?>
+                                    <?php $resenas = Farmacia::findres($e->Id_Farmacia); ?>
 
                                     <h5>Comentarios recientes</h5>
                                     <?php if ($resenas && $resenas->num_rows > 0): ?>

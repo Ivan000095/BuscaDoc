@@ -8,23 +8,25 @@ CREATE TABLE Usuarios (
   Nombre VARCHAR(50) not null,
   Rol ENUM('Administrador', 'Usuario', 'Doctor') NOT NULL,
   Correo VARCHAR(100) NOT NULL UNIQUE,
-  Foto VARCHAR(100) NOT NULL,
+  Foto VARCHAR(100),
   Estado BOOLEAN NOT NULL DEFAULT TRUE,
-  FechaCreacion DATE NOT NULL,
+  FechaCreacion DATE NOT NULL DEFAULT CURDATE(),
   pswd VARCHAR(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- Comentarios generales de la página
 CREATE TABLE ComentariosPag (
   Id_CPagina INT PRIMARY KEY AUTO_INCREMENT,
-  Comentario VARCHAR(200) NOT NULL
+  Comentario VARCHAR(200) NOT NULL,
+  FechaHora DATETIME NOT NULL DEFAULT NOW(),
+  Id_Usuario INT NOT NULL,
+  FOREIGN KEY (Id_Usuario) REFERENCES Usuarios(Id_Usuario)
+    ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- Clientes
 CREATE TABLE Clientes (
   Id_Cliente INT PRIMARY KEY AUTO_INCREMENT,
-  CURP VARCHAR(18) UNIQUE,
-  Nombre VARCHAR(50) NOT NULL,
   F_Nacimiento DATE NOT NULL,
   Genero ENUM('M', 'F', 'no binario') NOT NULL,
   Id_Usuario INT NOT NULL,
@@ -32,21 +34,10 @@ CREATE TABLE Clientes (
     ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Comentario en página hecho por cliente
-CREATE TABLE ComentarioPagClien (
-  Id_ComentarioClien INT PRIMARY KEY AUTO_INCREMENT,
-  Id_ComentarioPag INT NOT NULL,
-  Id_Cliente INT NOT NULL,
-  FOREIGN KEY (Id_ComentarioPag) REFERENCES ComentariosPag(Id_CPagina)
-    ON DELETE CASCADE ON UPDATE CASCADE,
-  FOREIGN KEY (Id_Cliente) REFERENCES Clientes(Id_Cliente)
-    ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- Doctores
 CREATE TABLE Doctores (
   Id_Doctor INT PRIMARY KEY AUTO_INCREMENT,
-  Nombre VARCHAR(100) NOT NULL,
   F_Nacimiento DATE NOT NULL,
   Idioma VARCHAR(50) NOT NULL,
   Descripcion VARCHAR(300) NOT NULL,
@@ -93,16 +84,6 @@ CREATE TABLE ResenaDoc (
     ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- Comentario página sobre doctores
-CREATE TABLE ComentarioPagDoc (
-  Id_ComentarioDoc INT PRIMARY KEY AUTO_INCREMENT,
-  Id_Doctor INT NOT NULL,
-  Id_ComentarioPag INT NOT NULL,
-  FOREIGN KEY (Id_ComentarioPag) REFERENCES ComentariosPag(Id_CPagina)
-    ON DELETE CASCADE ON UPDATE CASCADE,
-  FOREIGN KEY (Id_Doctor) REFERENCES Doctores(Id_Doctor)
-    ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- Farmacias
 CREATE TABLE Farmacias (
@@ -135,9 +116,11 @@ CREATE TABLE Cita (
   Detalle VARCHAR(300) NOT NULL,
   FechaHora_Realizacion DATETIME NOT NULL DEFAULT NOW(),
   FechaHora_Cita DATETIME NOT NULL,
-  Estado ENUM('Pendiente','Aceptada','Rechazada') NOT NULL DEFAULT 'Aceptada',
+  Estado ENUM('Pendiente','Aceptada','Rechazada') NOT NULL DEFAULT 'Pendiente',
   FOREIGN KEY (Id_Cliente) REFERENCES Clientes(Id_Cliente)
     ON DELETE CASCADE ON UPDATE CASCADE,
   FOREIGN KEY (Id_Doctor) REFERENCES Doctores(Id_Doctor)
     ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+INSERT INTO Usuarios(Nombre, Correo, pswd) VALUES('Admin', 'admin@gmail.com', SHA1(123));

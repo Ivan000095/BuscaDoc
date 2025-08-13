@@ -16,13 +16,29 @@ class Comentario {
 
     public static function findcom() {
         include('conexion.php');
-        $sql="SELECT
-            usuarios.Nombre,
-            usuarios.Foto,
-            comentariospag.Comentario
-            FROM comentariospag
-            JOIN usuarios ON usuarios.Id_Usuario=comentariospag.id_usuario;
-        ";
-        return $con->query($sql);
+        try {
+            // Establecer nombres de mes/día en español
+            $con->query("SET lc_time_names = 'es_ES';");
+
+            // Ejecutar la consulta
+            $sql = $con->prepare("
+                SELECT
+                    Usuarios.Nombre,
+                    Usuarios.Foto,
+                    ComentariosPag.Comentario,
+                    DATE_FORMAT(ComentariosPag.FechaHora, '%d %M %Y %H:%i') AS FechaHora
+                FROM ComentariosPag
+                JOIN Usuarios ON Usuarios.Id_Usuario = ComentariosPag.id_usuario
+                ORDER BY ComentariosPag.FechaHora DESC
+            ");
+            $sql->execute();
+
+            // Devolver directamente el resultado para usar fetch_assoc()
+            return $sql->get_result();
+
+        } catch (Exception $e) {
+            error_log("Error en findcom: " . $e->getMessage());
+            return false;
+        }
     }
 }

@@ -1,6 +1,11 @@
 <?php
     session_start();
-    if (isset($_SESSION["Rol"]) ) {
+
+    ini_set('display_errors', 1);
+    ini_set('display_startup_errors', 1);
+    error_reporting(E_ALL);
+
+    if (isset($_SESSION["Rol"]) && $_SESSION['ROl'] == 'Administrador') {
     include('../../modelos/Doctor.php');
     $idDoctor = $_REQUEST['id'];
     $Doctor = Doctor::find($idDoctor);
@@ -18,7 +23,7 @@
                 <div class="row">
                     <div class="col-md-6">
                         <div class="mb-3">
-                            <input type="hidden" name="idusr" value="<?php echo $Doctor->idusr ?>">
+			    <input type="hidden" name="idusr" value="<?php echo $Doctor->idusr; ?>">
                             <label for="nombre" class="form-label">Nombre<abbr class="text-danger">*</abbr></label>
                             <input type="text" class="form-control" name="nombre" id="nombre" value="<?= $Doctor->nombre ?>" required>
                         </div>
@@ -70,7 +75,7 @@
                         <div class="md-3">
                             <div class="mb-3">
                             <label for="fecha" class="form-label">Fecha de nacimiento</label>
-                            <input type="date" class="form-control" name="fecha" id="fecha" value="<?php $Doctor->fecha; ?>" required>
+                            <input type="date" class="form-control" name="fecha" id="fecha" value="<?php echo $Doctor->fecha; ?>" required>
                         </div>
                         <br>
                         <div class="mb-3">
@@ -127,6 +132,6 @@
 
 <?php 
     } else {
-      echo '<meta http-equiv="refresh" content="0;url=/BuscaDoc/create.php">';
+      echo '<meta http-equiv="refresh" content="0;url=/BuscaDoc/create.php?advertencia=1">';
     }
 ?>

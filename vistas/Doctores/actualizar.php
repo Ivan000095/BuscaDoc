@@ -1,4 +1,9 @@
 <?php
+
+    ini_set('display_errors', 1);
+    ini_set('display_startup_errors', 1);
+    error_reporting(E_ALL);
+
     include('../../modelos/Doctor.php');
     $idDoctor = $_REQUEST['idDoctor'];
     $Doctor=  Doctor::find($idDoctor);
@@ -17,5 +22,5 @@
     $Doctor->diasLab = $_REQUEST['diaslab'];
     $Doctor->ubicacion = $_REQUEST['ubicacion'];
     $Doctor->save();
-   echo '<meta http-equiv="refresh" content="0;url=index.php">';
+    echo '<meta http-equiv="refresh" content="0;url=index.php?Rol=Administrador&cambio=1">';
 ?>

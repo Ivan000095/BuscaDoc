@@ -4,8 +4,39 @@
 ?>
 
 <html>
+    <head>
+        <style>
+            @media (min-width: 1200px) {
+                .modal-xl {
+                    --bs-modal-width: 500px!important;
+                }
+            }
+
+            @media (min-width: 576px) {
+                .modal {
+                    --bs-modal-margin: 15%;
+                    --bs-modal-box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+                }
+            }
+        </style>
+   </head>
     <?php include ('head.php')?>
     <body>
+        <?php if (isset($_GET['iniciosesion']) && $_GET['iniciosesion'] == 1){ ?>
+        <script>
+            window.addEventListener('load', () => {
+                var modal = new bootstrap.Modal(document.getElementById('modal'));
+                modal.show();
+            });
+        </script>
+        <?php } elseif (isset($_GET['logout']) && $_GET['logout'] == 1){?>
+            <script>
+            window.addEventListener('load', () => {
+                var modal = new bootstrap.Modal(document.getElementById('modal2'));
+                modal.show();
+            });
+        </script>
+        <?php } ?>
         <?php include ('menu.php')?>
         <!-- Aquí puede ir una imagen de presentación -->
          <header class="bg-dark py-5" style="background-image: url(img/fondo.png); ">
@@ -29,10 +60,14 @@
                                 <div class="text-center">
                                     <h5 class="fw-bolder">Doctores</h5>
                                     <!-- Descripcion-->
-                                    Aqui encontrara contactos para una emergencia,enfermedad o cotizar precios.
+                                    Aqui encontrara contactos para una emergencia, enfermedad o cotizar precios.
                                     <br>
                                     <br>
-                                    <a class="btn btn-outline-dark" href="/BuscaDoc/vistas/Doctores/vista.php"> Ver Doctores</a>
+                                    <?php if(isset($_SESSION['Rol'])) {?>
+                                        <a class="btn btn-outline-dark" href="/BuscaDoc/vistas/Doctores/vista.php?Rol=<?php echo $_SESSION['Rol']; ?>"> Ver Doctores</a>
+                                    <?php } else { ?>
+                                        <a class="btn btn-outline-dark" href="/BuscaDoc/vistas/Doctores/vista.php"> Ver Doctores</a>
+                                    <?php } ?>
                                 </div>
                             </div>
                         </div>
@@ -57,6 +92,44 @@
                 </div>
             </div>         
         </section>
+
+        <div class="row">
+            <div class="col-4">
+                <div class="modal fade" id="modal" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-xl modal-dialog-scrollable">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                            </div>
+                            <div class="modal-body text-success fs-5">
+                                    Sesión Iniciada
+                            </div>
+                            <div class="modal-footer">
+                                <a href="index.php?Rol=<?php echo $_SESSION['Rol']; ?>"><button type="button" class="btn btn-outline-success" >Cerrar</button></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-4">
+                <div class="modal fade" id="modal2" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-xl modal-dialog-scrollable">
+                        <div class="modal-content">
+                            <div class="modal-body text-success fs-5">
+                                    Sesión cerrada
+                            </div>
+                            <div class="modal-footer">
+                                <a href="index.php"><button type="button" class="btn btn-outline-success" >Cerrar</button></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <?php include('footer.php')?>
     </body>
 </html>

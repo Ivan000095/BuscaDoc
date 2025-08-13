@@ -11,7 +11,7 @@
                 <i class="bi bi-instagram text-white fs-2 brav"></i></a>
         </div>
         <div class="col-3 d-flex align-items-center justify-content-end">
-            <a href="https://www.utselva.edu.mx/"><img id="utselva" src="/ServiFinder/img/logo-uts.png" alt="UTSelva" style="max-height: 60px;" class="d-block mx-auto"></a>
+            <a href="https://www.utselva.edu.mx/"><img id="utselva" src="/BuscaDoc/img/logo-uts.png" alt="UTSelva" style="max-height: 60px;" class="d-block mx-auto"></a>
         </div>
     </div>
 </footer>
