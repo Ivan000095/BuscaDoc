@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="4b6ea322-1ff3-4e63-93fb-838f49b98579" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/bootstrap-5.3.0/css/Estilo.css" beforeDir="false" afterPath="$PROJECT_DIR$/bootstrap-5.3.0/css/Estilo.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bootstrap-5.3.0/css/bootstrap.css" beforeDir="false" afterPath="$PROJECT_DIR$/bootstrap-5.3.0/css/bootstrap.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bootstrap-5.3.0/css/bootstrap.min.css" beforeDir="false" afterPath="$PROJECT_DIR$/bootstrap-5.3.0/css/bootstrap.min.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/footer.php" beforeDir="false" afterPath="$PROJECT_DIR$/footer.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/head.php" beforeDir="false" afterPath="$PROJECT_DIR$/head.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/index.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/menu.php" beforeDir="false" afterPath="$PROJECT_DIR$/menu.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/servifinder.sql" beforeDir="false" afterPath="$PROJECT_DIR$/servifinder.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vistas/Doctores/actualizar.php" beforeDir="false" afterPath="$PROJECT_DIR$/vistas/Doctores/actualizar.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vistas/Doctores/comentario.php" beforeDir="false" afterPath="$PROJECT_DIR$/vistas/Doctores/comentario.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vistas/Doctores/destroy.php" beforeDir="false" afterPath="$PROJECT_DIR$/vistas/Doctores/destroy.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vistas/Doctores/guardar.php" beforeDir="false" afterPath="$PROJECT_DIR$/vistas/Doctores/guardar.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vistas/Doctores/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/vistas/Doctores/index.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vistas/Doctores/vista.php" beforeDir="false" afterPath="$PROJECT_DIR$/vistas/Doctores/vista.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vistas/Establecimientos/edit.php" beforeDir="false" afterPath="$PROJECT_DIR$/vistas/Establecimientos/edit.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vistas/Establecimientos/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/vistas/Establecimientos/index.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vistas/Establecimientos/update.php" beforeDir="false" afterPath="$PROJECT_DIR$/vistas/Establecimientos/update.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vistas/Establecimientos/vista.php" beforeDir="false" afterPath="$PROJECT_DIR$/vistas/Establecimientos/vista.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vistas/Profesionistas/actualizar.php" beforeDir="false" afterPath="$PROJECT_DIR$/vistas/Profesionistas/actualizar.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vistas/Profesionistas/comentario.php" beforeDir="false" afterPath="$PROJECT_DIR$/vistas/Profesionistas/comentario.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vistas/Profesionistas/create.php" beforeDir="false" afterPath="$PROJECT_DIR$/vistas/Profesionistas/create.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vistas/Profesionistas/destroy.php" beforeDir="false" afterPath="$PROJECT_DIR$/vistas/Profesionistas/destroy.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vistas/Profesionistas/guardar.php" beforeDir="false" afterPath="$PROJECT_DIR$/vistas/Profesionistas/guardar.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vistas/Profesionistas/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/vistas/Profesionistas/index.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/vistas/Profesionistas/vista.php" beforeDir="false" afterPath="$PROJECT_DIR$/vistas/Profesionistas/vista.php" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ComposerSettings">
+    <execution />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "associatedIndex": 0
+}]]></component>
+  <component name="ProjectId" id="304V18jyxtkNA0StQzLU4jTFnPM" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "main",
+    "ignore.virus.scanning.warn.message": "true",
+    "last_opened_file_path": "C:/xampp/htdocs/ServiFinder",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.stylelint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.stylelint": "",
+    "nodejs_package_manager_path": "npm",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-js-predefined-d6986cc7102b-09060db00ec0-JavaScript-PS-251.26927.60" />
+        <option value="bundled-php-predefined-a98d8de5180a-e5747d4f5a45-com.jetbrains.php.sharedIndexes-PS-251.26927.60" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="4b6ea322-1ff3-4e63-93fb-838f49b98579" name="Changes" comment="" />
+      <created>1752886614444</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1752886614444</updated>
+      <workItem from="1752886616438" duration="52000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>
